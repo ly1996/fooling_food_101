@@ -38,10 +38,17 @@ def cal_one_hot(label,num_classes):
     return one_hot_label
 
 def cal_loss(preds, y):
-    return np.mean(-np.sum(y * np.log(preds)))
+    # los = []
+    # len = preds.shape[0]
+
+    return np.mean(-np.sum(y * np.log(preds),axis=1))
     # return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
 
 def gen_fooling_images(model,x_input,grad):
+    # Grab a reference to the first and last layer of the neural net
+    model_input_layer = model.layers[0].input
+    model_output_layer = model.layers[-1].output
+
     eps = 16.0
     num_iteration = 10
     momentum = 1.0
@@ -60,8 +67,10 @@ def gen_fooling_images(model,x_input,grad):
     y = np.argmax(preds,1)
     print (y)
     one_hot = cal_one_hot(y, 101)
+    print(one_hot.shape)
 
     cross_entropy = cal_loss(preds,one_hot)
+    print (cross_entropy.shape)
     gradient_function = K.gradients(cross_entropy, x_input)[0]
     grab_cost_and_gradients_from_mode = K.function([cross_entropy,K.learning_phase()], [cross_entropy,gradient_function])
 
