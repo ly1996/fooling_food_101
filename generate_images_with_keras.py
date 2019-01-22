@@ -40,9 +40,9 @@ def cal_one_hot(label,num_classes):
 def cal_loss(preds, y):
     # los = []
     # len = preds.shape[0]
-    return -np.sum(y * np.log(preds), axis=1)
+    # return -np.sum(y * np.log(preds), axis=1)
     # return np.mean(-np.sum(y * np.log(preds),axis=1))
-    # return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
+    return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
 
 def gen_fooling_images(model,x_input,grad):
     # Grab a reference to the first and last layer of the neural net
