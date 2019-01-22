@@ -40,6 +40,11 @@ max_change_below = original_image - 0.01
 # Create a copy of the input image to hack on
 hacked_image = np.copy(original_image)
 
+batch_shape = [1, 299 , 299, 3]
+grad = tf.zeros(shape=batch_shape)
+momentum = 1.0
+alpha = (2.0 * 16.0 / 255.0) / 10
+
 # How much to update the hacked image in each iteration
 learning_rate = 0.1
 
@@ -70,8 +75,12 @@ for i in range(10):
 
     print (gradients.shape)
 
+    noise = noise / tf.reduce_mean(tf.abs(noise), [1, 2, 3], keep_dims=True)
+    noise = momentum * grad + noise
+    hacked_image = hacked_image + alpha * tf.sign(noise)
+
     # Move the hacked image one step further towards fooling the model
-    hacked_image += gradients * learning_rate
+    # hacked_image += gradients * learning_rate
 
     # Ensure that the image doesn't ever change too much to either look funny or to become an invalid image
     hacked_image = np.clip(hacked_image, max_change_below, max_change_above)
