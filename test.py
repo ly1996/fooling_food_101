@@ -41,6 +41,9 @@ hacked_image = np.copy(original_image)
 # How much to update the hacked image in each iteration
 learning_rate = 0.1
 
+print ("output shape",model_output_layer.shape)
+print ("loss shape",model_output_layer[0, object_type_to_fake].shape)
+
 # Define the cost function.
 # Our 'cost' will be the likelihood out image is the target class according to the pre-trained model
 cost_function = model_output_layer[0, object_type_to_fake]
