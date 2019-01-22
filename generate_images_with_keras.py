@@ -49,7 +49,7 @@ def gen_fooling_images(model,x_input,grad):
     preds = model.predict(x_input)
 
     #y :真实的类标
-    y = tf.argmax(preds,1)
+    y = np.argmax(preds,1)
     print (y)
     one_hot = tf.one_hot(y, 101)
 
