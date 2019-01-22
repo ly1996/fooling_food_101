@@ -65,6 +65,8 @@ for i in range(num_iteration):
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
     print(np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True))
+    if np.isnan(np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True)).any():
+        break
 
     noise = gradients / np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True)
     # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
