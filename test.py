@@ -74,10 +74,12 @@ for i in range(10):
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
     print (gradients.shape)
+    print (type(gradients))
 
-    noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
+    noise = gradients
+    # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
-    hacked_image = hacked_image + alpha * tf.sign(noise)
+    hacked_image = hacked_image + alpha * np.sign(noise)
 
     grad = noise
 
