@@ -9,6 +9,7 @@ import os
 # Load pre-trained image recognition model
 model = inception_v3.InceptionV3()
 
+
 # Grab a reference to the first and last layer of the neural net
 model_input_layer = model.layers[0].input
 model_output_layer = model.layers[-1].output
@@ -61,12 +62,13 @@ cost = 0.0
 # In a loop, keep adjusting the hacked image slightly so that it tricks the model more and more
 # until it gets to at least 80% confidence
 for i in range(10):
-# while cost < 0.80:
     # Check how close the image is to our target class and grab the gradients we
     # can use to push it one more step in that direction.
     # Note: It's really important to pass in '0' for the Keras learning mode here!
     # Keras layers behave differently in prediction vs. train modes!
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
+
+    print (gradients.shape)
 
     # Move the hacked image one step further towards fooling the model
     hacked_image += gradients * learning_rate
