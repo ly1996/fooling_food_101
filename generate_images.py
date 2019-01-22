@@ -64,6 +64,7 @@ def stop(x, y, i, x_max, x_min, grad):
   return tf.less(i, num_iter)
 
 def main(_):
+    print("enter main")
     input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos")
 
     eps = FLAGS.max_epsilon
