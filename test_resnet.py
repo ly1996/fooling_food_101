@@ -1,55 +1,43 @@
-import numpy as np
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications import inception_v3
-from tensorflow.keras import backend as K
-from PIL import Image
+import numpy as np
 import os
+from scipy.misc import imread
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from PIL import Image
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+from tensorflow.keras import backend as K
 
-# Load pre-trained image recognition model
-model = inception_v3.InceptionV3()
-eps = 2.0 * 16.0 / 255.0
+eps = 16.0
+num_iteration = 10
+momentum = 1.0
+alpha = eps / num_iteration
+
+model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-12-1.7504.hdf5")
+model = load_model(model_path)
 
 # Grab a reference to the first and last layer of the neural net
 model_input_layer = model.layers[0].input
 model_output_layer = model.layers[-1].output
 
-# Choose an ImageNet object to fake
-# The list of classes is available here: https://gist.github.com/ageitgey/4e1342c10a71981d0b491e1b8227328b
-# Class #859 is "toaster"
-object_type_to_fake = 859
-
+object_type_to_fake = 0
 # Load the image to hack
-img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos/961770.jpg"), target_size=(299, 299))
+img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos/961770.jpg"), target_size=(224, 224))
 original_image = image.img_to_array(img)
 
-# Scale the image so all pixel intensities are between [-1, 1] as the model expects
-original_image /= 255.
-original_image -= 0.5
-original_image *= 2.
+original_image = preprocess_input(original_image)
 
 # Add a 4th dimension for batch size (as Keras expects)
 original_image = np.expand_dims(original_image, axis=0)
 
-x_max = np.clip(original_image + eps, -1.0, 1.0)
-x_min = np.clip(original_image - eps, -1.0, 1.0)
-
-# Pre-calculate the maximum change we will allow to the image
-# We'll make sure our hacked image never goes past this so it doesn't look funny.
-# A larger number produces an image faster but risks more distortion.
-max_change_above = original_image + 0.01
-max_change_below = original_image - 0.01
+x_min = original_image - eps
+x_max = original_image + eps
 
 # Create a copy of the input image to hack on
 hacked_image = np.copy(original_image)
 
-batch_shape = [1, 299 , 299, 3]
+batch_shape = [1, 224 , 224, 3]
 grad = np.zeros(shape=batch_shape)
-momentum = 1.0
-alpha = (2.0 * 16.0 / 255.0) / 10
-
-# How much to update the hacked image in each iteration
-learning_rate = 0.1
 
 print ("output shape",model_output_layer.shape)
 
@@ -67,19 +55,16 @@ grab_cost_and_gradients_from_model = K.function([model_input_layer, K.learning_p
 
 cost = 0.0
 
-# In a loop, keep adjusting the hacked image slightly so that it tricks the model more and more
-# until it gets to at least 80% confidence
-for i in range(10):
+for i in range(num_iteration):
+    print (i)
+
     # Check how close the image is to our target class and grab the gradients we
     # can use to push it one more step in that direction.
     # Note: It's really important to pass in '0' for the Keras learning mode here!
     # Keras layers behave differently in prediction vs. train modes!
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
-    #gradients.shape:(1,299,299,3)
-
-    # noise = gradients
-    noise = gradients / np.mean(np.abs(gradients),axis=(1,2,3),keepdims=True)
+    noise = gradients / np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True)
     # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
     hacked_image = hacked_image + alpha * np.sign(noise)
@@ -91,16 +76,14 @@ for i in range(10):
 
     # Ensure that the image doesn't ever change too much to either look funny or to become an invalid image
     hacked_image = np.clip(hacked_image, x_min, x_max)
-    # hacked_image = np.clip(hacked_image, -1.0, 1.0)
 
-    print("Model's predicted likelihood that the image is a toaster: {:.8}".format(cost))
-
-# De-scale the image's pixels from [-1, 1] back to the [0, 255] range
 img = hacked_image[0]
-img /= 2.
-img += 0.5
-img *= 255.
+mean = [103.939, 116.779, 123.68]
+img[..., 0] += mean[0]
+img[..., 1] += mean[1]
+img[..., 2] += mean[2]
 
+img = np.clip(img, x_min, x_max)
 # Save the hacked image!
 im = Image.fromarray(img.astype(np.uint8))
-im.save("hacked-image.png")
+im.save("hacked-image.jpg")
