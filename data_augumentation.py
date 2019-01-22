@@ -36,9 +36,9 @@ for dirnames in os.listdir(original_dir):
                                 save_prefix=dirs[0:-4],
                                 save_format='jpg'):
             i += 1
-            if i >= 10:
+            if i >= 4:
                 break  # otherwise the generator would loop indefinitely
-    print(dirnames + 'complete')
+    print(dirnames + ' complete')
 
 # img = load_img(os.path.expanduser('~/Disk/ic-data/1.jpg'))  # this is a PIL image, please replace to your own file path
 # x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
