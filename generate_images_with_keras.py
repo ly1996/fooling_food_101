@@ -4,6 +4,8 @@ import os
 from scipy.misc import imread
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+from tensorflow.keras import backend as K
 
 import re
 from PIL import Image
@@ -28,30 +30,77 @@ tf.flags.DEFINE_float(
 
 FLAGS = tf.flags.FLAGS
 
-def gen_fooling_images(model,x_input):
+def cal_loss(preds, y, grad):
+    return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
+
+def gen_fooling_images(model,x_input,grad):
+    eps = 16.0
+    num_iteration = 10
+    momentum = 1.0
+    alpha = eps / num_iteration
+
+    x_input = preprocess_input(x_input)
+    x_min = x_input - eps
+    x_max = x_input + eps
+
     print("call gen_fooling_images")
+
+    #每张图片得到101维的属于各个类的概率
+    preds = model.predict(x_input)
+
+    #y :真实的类标
+    y = tf.argmax(preds,1)
+    one_hot = tf.one_hot(y, 101)
+
+    cross_entropy = cal_loss(preds,one_hot)
+
+    for i in range(num_iteration):
+        noise = K.gradients(cross_entropy, x_input)
+        print(noise.shape)
+        noise = noise / tf.reduce_mean(tf.abs(noise), [1, 2, 3], keep_dims=True)
+        noise = momentum * grad + noise
+        x_input = x_input + alpha * tf.sign(noise)
+        x_input = tf.clip_by_value(x_input, x_min, x_max)
+
+        preds = model.predict(x_input)
+        cross_entropy = cal_loss(preds, one_hot)
+
+    mean = [103.939, 116.779, 123.68]
+    x_input[..., 0] += mean[0]
+    x_input[..., 1] += mean[1]
+    x_input[..., 2] += mean[2]
+
+    x_input = tf.clip_by_value(x_input, 0, 255)
+
+    return x_input
+
+def save_img(new_image,file):
+    output_dir = "~/winter-camp-pek/tmp"
+    im = Image.fromarray(new_image)
+    im.save(os.path.join(output_dir, file))
 
 def main(_):
     print("enter main")
     target_size = (224, 224)
     input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos")
-    model_path = ""
+    model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-12-1.7504.hdf5")
 
     eps = FLAGS.max_epsilon
     batch_shape = [FLAGS.batch_size, FLAGS.image_height, FLAGS.image_width, 3]
 
     print("batch_shape",batch_shape)
 
-    # model = load_model(model_path)
-    model = 1
+    # model = 1
+    model = load_model(model_path)
 
     x_input = []
+    files = []
     idx = 0
 
     for file in os.listdir(input_dir):
         # print(file)
-        result = re.findall(r"(.*).jpg", file)
-        number = result[0]
+        # result = re.findall(r"(.*).jpg", file)
+        # number = result[0]
         img = Image.open(os.path.join(input_dir, file))
         if img.size != target_size:
             img = img.resize(target_size)
@@ -59,12 +108,17 @@ def main(_):
 
         if idx < FLAGS.batch_size:
             x_input.append(x)
+            files.append(file)
             idx = idx + 1
         else:
+            grad = tf.zeros(shape=batch_shape)
             x_input = np.array(x_input)
-            gen_fooling_images(model,x_input)
+            new_images = gen_fooling_images(model,x_input,grad)
+            for i in range(FLAGS.batch_size):
+                save_img(new_images[i], files[i])
             print(x_input.shape)
             x_input = []
+            files = []
             idx = 0
 
 if __name__ == '__main__':
