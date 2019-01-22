@@ -30,8 +30,16 @@ tf.flags.DEFINE_float(
 
 FLAGS = tf.flags.FLAGS
 
+def cal_one_hot(label,num_classes):
+    # label = np.array([0, 3, 2, 8, 9, 1])  ##标签数据，标签从0开始
+    classes = num_classes  ##类别数为最大数加1
+    one_hot_label = np.zeros(shape=(label.shape[0], classes))  ##生成全0矩阵
+    one_hot_label[np.arange(0, label.shape[0]), label] = 1  ##相应标签位置置1
+    return one_hot_label
+
 def cal_loss(preds, y):
-    return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
+    return np.mean(-np.sum(y * np.log(preds)))
+    # return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
 
 def gen_fooling_images(model,x_input,grad):
     eps = 16.0
@@ -51,20 +59,22 @@ def gen_fooling_images(model,x_input,grad):
     #y :真实的类标
     y = np.argmax(preds,1)
     print (y)
-    one_hot = tf.one_hot(y, 101)
+    one_hot = cal_one_hot(y, 101)
 
     cross_entropy = cal_loss(preds,one_hot)
 
     for i in range(num_iteration):
         noise = np.array(K.gradients(cross_entropy, x_input))
         print(noise.shape)
-        noise = noise / tf.reduce_mean(tf.abs(noise), [1, 2, 3], keep_dims=True)
+
+        noise = noise / np.mean(np.abs(noise), [1, 2, 3], keep_dims=True)
         noise = momentum * grad + noise
-        x_input = x_input + alpha * tf.sign(noise)
-        x_input = tf.clip_by_value(x_input, x_min, x_max)
+
+        x_input = x_input + alpha * np.sign(noise)
+        x_input = np.clip(x_input, x_min, x_max)
 
         preds = model.predict(x_input)
-        print(tf.argmax(preds,1))
+        print(np.argmax(preds,1))
         cross_entropy = cal_loss(preds, one_hot)
 
     mean = [103.939, 116.779, 123.68]
