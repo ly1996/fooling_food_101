@@ -50,12 +50,13 @@ def gen_fooling_images(model,x_input,grad):
 
     #y :真实的类标
     y = tf.argmax(preds,1)
+    print (y)
     one_hot = tf.one_hot(y, 101)
 
     cross_entropy = cal_loss(preds,one_hot)
 
     for i in range(num_iteration):
-        noise = K.gradients(cross_entropy, x_input)
+        noise = np.array(K.gradients(cross_entropy, x_input))
         print(noise.shape)
         noise = noise / tf.reduce_mean(tf.abs(noise), [1, 2, 3], keep_dims=True)
         noise = momentum * grad + noise
@@ -63,6 +64,7 @@ def gen_fooling_images(model,x_input,grad):
         x_input = tf.clip_by_value(x_input, x_min, x_max)
 
         preds = model.predict(x_input)
+        print(tf.argmax(preds,1))
         cross_entropy = cal_loss(preds, one_hot)
 
     mean = [103.939, 116.779, 123.68]
