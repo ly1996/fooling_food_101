@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.5.2 (ssh://sun@166.111.80.47:5000/usr/bin/python3)" project-jdk-type="Python SDK" />
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings is-module-sdk="true">
+        <envs>
+          <env key="LD_LIBRARY_PATH" value="/usr/local/cuda-*.0/lib64" />
+        </envs>
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myEnvs">
+          <map>
+            <entry key="LD_LIBRARY_PATH" value="/usr/local/cuda-*.0/lib64" />
+          </map>
+        </option>
+      </console-settings>
+    </option>
+  </component>
+</project>
