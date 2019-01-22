@@ -33,6 +33,10 @@ original_image = preprocess_input(original_image)
 # Add a 4th dimension for batch size (as Keras expects)
 original_image = np.expand_dims(original_image, axis=0)
 
+preds = model.predict(original_image)
+for perce in preds[0]:
+    print(perce)
+
 x_min = original_image - eps
 x_max = original_image + eps
 
