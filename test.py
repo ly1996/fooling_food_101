@@ -79,6 +79,8 @@ for i in range(10):
     noise = momentum * grad + noise
     hacked_image = hacked_image + alpha * tf.sign(noise)
 
+    grad = noise
+
     # Move the hacked image one step further towards fooling the model
     # hacked_image += gradients * learning_rate
 
