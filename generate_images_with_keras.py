@@ -86,7 +86,7 @@ def gen_fooling_images(model,x_input,grad):
         print(noise.shape)
         # print(x_input.shape)
 
-        si = np.sign(noise)
+        si = np.sign([noise])
         print(si.shape)
 
         x_input = x_input + alpha * si
