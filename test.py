@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications import inception_v3
 from tensorflow.keras import backend as K
@@ -45,7 +46,7 @@ print ("output shape",model_output_layer.shape)
 
 # Define the cost function.
 # Our 'cost' will be the likelihood out image is the target class according to the pre-trained model
-cost_function = -np.log(model_output_layer[0, object_type_to_fake])
+cost_function = -tf.log(model_output_layer[0, object_type_to_fake])
 # np.log()
 
 # We'll ask Keras to calculate the gradient based on the input image and the currently predicted class
