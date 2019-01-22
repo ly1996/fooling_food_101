@@ -56,7 +56,8 @@ cost = 0.0
 
 # In a loop, keep adjusting the hacked image slightly so that it tricks the model more and more
 # until it gets to at least 80% confidence
-while cost < 0.80:
+for i in range(10):
+# while cost < 0.80:
     # Check how close the image is to our target class and grab the gradients we
     # can use to push it one more step in that direction.
     # Note: It's really important to pass in '0' for the Keras learning mode here!
