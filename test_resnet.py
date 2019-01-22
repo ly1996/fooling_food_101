@@ -101,5 +101,9 @@ img = np.clip(img, 0, 255)
 print(img.shape)
 # Save the hacked image!
 
-im = Image.fromarray(img.astype(np.uint8))
+img_norm = np.copy(img)
+img_norm[..., 0] = img[..., 2]
+img_norm[..., 2] = img[..., 0]
+
+im = Image.fromarray(img_norm.astype(np.uint8))
 im.save("hacked-image.jpg")
