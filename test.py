@@ -20,7 +20,7 @@ model_output_layer = model.layers[-1].output
 object_type_to_fake = 859
 
 # Load the image to hack
-img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos/961770.jpg"), target_size=(299, 299))
+img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/apple_pie/1005649.jpg"), target_size=(299, 299))
 original_image = image.img_to_array(img)
 
 # Scale the image so all pixel intensities are between [-1, 1] as the model expects

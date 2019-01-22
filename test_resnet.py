@@ -22,7 +22,7 @@ model_output_layer = model.layers[-1].output
 
 object_type_to_fake = 0
 # Load the image to hack
-img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos/961770.jpg"), target_size=(224, 224))
+img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/apple_pie/1005649.jpg"), target_size=(224, 224))
 original_image = image.img_to_array(img)
 
 original_image = preprocess_input(original_image)
