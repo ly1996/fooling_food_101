@@ -85,9 +85,9 @@ def gen_fooling_images(model,x_input,grad):
         x_input = x_input + alpha * np.sign(noise)
         x_input = np.clip(x_input, x_min, x_max)
 
-        preds = model.predict(x_input)
-        print(np.argmax(preds,1))
-        cross_entropy = cal_loss(preds, one_hot)
+        # preds = model.predict(x_input)
+        # print(np.argmax(preds,1))
+        # cross_entropy = cal_loss(preds, one_hot)
 
     mean = [103.939, 116.779, 123.68]
     x_input[..., 0] += mean[0]
