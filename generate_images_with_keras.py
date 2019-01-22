@@ -72,7 +72,7 @@ def gen_fooling_images(model,x_input,grad):
     # cross_entropy = cal_loss(preds,one_hot)
     cross_entropy = cal_loss(model_output_layer,one_hot)
     # print (cross_entropy.shape)
-    gradient_function = K.gradients(cross_entropy, x_input)[0]
+    gradient_function = K.gradients(cross_entropy, model_input_layer)[0]
     grab_cost_and_gradients_from_mode = K.function([model_input_layer,K.learning_phase()], [cross_entropy,gradient_function])
 
     for i in range(num_iteration):
