@@ -8,7 +8,7 @@ import os
 
 # Load pre-trained image recognition model
 model = inception_v3.InceptionV3()
-
+eps = 2.0 * 16.0 / 255.0
 
 # Grab a reference to the first and last layer of the neural net
 model_input_layer = model.layers[0].input
@@ -30,6 +30,9 @@ original_image *= 2.
 
 # Add a 4th dimension for batch size (as Keras expects)
 original_image = np.expand_dims(original_image, axis=0)
+
+x_max = np.clip(original_image + eps, -1.0, 1.0)
+x_min = np.clip(original_image - eps, -1.0, 1.0)
 
 # Pre-calculate the maximum change we will allow to the image
 # We'll make sure our hacked image never goes past this so it doesn't look funny.
@@ -74,14 +77,11 @@ for i in range(10):
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
     #gradients.shape:(1,299,299,3)
-    print (gradients.shape)
-    print (type(gradients))
 
     # noise = gradients
     noise = gradients / np.mean(np.abs(gradients),axis=(1,2,3),keepdims=True)
     # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
-    print (type(noise))
     hacked_image = hacked_image + alpha * np.sign(noise)
 
     grad = noise
@@ -90,8 +90,8 @@ for i in range(10):
     # hacked_image += gradients * learning_rate
 
     # Ensure that the image doesn't ever change too much to either look funny or to become an invalid image
-    hacked_image = np.clip(hacked_image, max_change_below, max_change_above)
-    hacked_image = np.clip(hacked_image, -1.0, 1.0)
+    hacked_image = np.clip(hacked_image, x_min, x_max)
+    # hacked_image = np.clip(hacked_image, -1.0, 1.0)
 
     print("Model's predicted likelihood that the image is a toaster: {:.8}%".format(cost * 100))
 
