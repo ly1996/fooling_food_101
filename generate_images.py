@@ -83,6 +83,7 @@ def main(_):
 
         with tf.Session() as sess:
             for filenames, images in load_images(input_dir, batch_shape):
+                print ("shape", images.shape)
                 adv_images = sess.run(x_adv, feed_dict={x_input: images})
 
 if __name__ == '__main__':
