@@ -64,6 +64,8 @@ def stop(x, y, i, x_max, x_min, grad):
   return tf.less(i, num_iter)
 
 def main(_):
+    input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos")
+
     eps = FLAGS.max_epsilon
     batch_shape = [FLAGS.batch_size, FLAGS.image_height, FLAGS.image_width, 3]
 
@@ -80,7 +82,7 @@ def main(_):
         x_adv, _, _, _, _, _ = tf.while_loop(stop, graph, [x_input, y, i, x_max, x_min, grad])
 
         with tf.Session() as sess:
-            for filenames, images in load_images(FLAGS.input_dir, batch_shape):
+            for filenames, images in load_images(input_dir, batch_shape):
                 adv_images = sess.run(x_adv, feed_dict={x_input: images})
 
 if __name__ == '__main__':
