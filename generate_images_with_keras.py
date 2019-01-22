@@ -61,6 +61,7 @@ def main(_):
             x_input.append(x)
             idx = idx + 1
         else:
+            x_input = np.array(x_input)
             gen_fooling_images(model,x_input)
             print(x_input.shape)
             x_input = []
