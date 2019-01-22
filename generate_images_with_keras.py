@@ -38,6 +38,7 @@ def main(_):
     print("batch_shape",batch_shape)
 
     for file in os.listdir(input_dir):
+        print(file)
         result = re.findall(r"(.*).jpg", file)
         number = result[0]
         img = Image.open(os.path.join(input_dir, file))
