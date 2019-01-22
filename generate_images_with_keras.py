@@ -64,7 +64,7 @@ def gen_fooling_images(model,x_input,grad):
     cross_entropy = cal_loss(preds,one_hot)
 
     for i in range(num_iteration):
-        noise = np.array(K.gradients(cross_entropy, x_input))
+        noise = np.array(K.gradients(cross_entropy, x_input)[0])
         print(noise.shape)
 
         noise = noise / np.mean(np.abs(noise), [1, 2, 3], keep_dims=True)
