@@ -30,7 +30,7 @@ tf.flags.DEFINE_float(
 
 FLAGS = tf.flags.FLAGS
 
-def cal_loss(preds, y, grad):
+def cal_loss(preds, y):
     return tf.reduce_mean(-tf.reduce_sum(y * tf.log(preds), reduction_indices=[1]))
 
 def gen_fooling_images(model,x_input,grad):
