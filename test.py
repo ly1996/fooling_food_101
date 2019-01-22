@@ -73,10 +73,12 @@ for i in range(10):
     # Keras layers behave differently in prediction vs. train modes!
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
+    #gradients.shape:(1,299,299,3)
     print (gradients.shape)
     print (type(gradients))
 
-    noise = gradients
+    # noise = gradients
+    noise = gradients / np.mean(np.abs(gradients),axis=(1,2,3),keepdims=True)
     # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
     print (type(noise))
