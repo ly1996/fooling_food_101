@@ -105,5 +105,10 @@ img_norm = np.copy(img)
 img_norm[..., 0] = img[..., 2]
 img_norm[..., 2] = img[..., 0]
 
+original_image = np.expand_dims(img_norm, axis=0)
+preds = model.predict(original_image)
+for perce in preds[0]:
+    print(perce)
+
 im = Image.fromarray(img_norm.astype(np.uint8))
 im.save("hacked-image.jpg")
