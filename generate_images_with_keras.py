@@ -83,16 +83,13 @@ def gen_fooling_images(model,x_input,grad):
         noise = noise / np.mean(np.abs(noise), keepdims=True)
         noise = momentum * grad + noise
 
-        print(noise.shape)
+        print(type(noise))
         # print(x_input.shape)
-
-        noise[noise >= 0] = 1
-        noise[noise < 0] = 0
 
         # si = np.sign(noise)
         # print(si.shape)
 
-        x_input = x_input + alpha * noise
+        x_input = x_input + alpha * tf.sign(noise)
         x_input = np.clip(x_input, x_min, x_max)
 
         # preds = model.predict(x_input)
