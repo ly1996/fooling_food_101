@@ -78,9 +78,7 @@ for i in range(10):
 
     #gradients.shape:(1,299,299,3)
 
-    # noise = gradients
     noise = gradients / np.mean(np.abs(gradients),axis=(1,2,3),keepdims=True)
-    # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
     hacked_image = hacked_image + alpha * np.sign(noise)
 

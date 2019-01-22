@@ -83,7 +83,7 @@ img[..., 0] += mean[0]
 img[..., 1] += mean[1]
 img[..., 2] += mean[2]
 
-img = np.clip(img, x_min, x_max)
+img = np.clip(img, 0, 225)
 # Save the hacked image!
 im = Image.fromarray(img.astype(np.uint8))
 im.save("hacked-image.jpg")
