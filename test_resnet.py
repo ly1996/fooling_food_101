@@ -64,6 +64,8 @@ for i in range(num_iteration):
     # Keras layers behave differently in prediction vs. train modes!
     cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
+    print(np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True))
+
     noise = gradients / np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True)
     # noise = gradients / tf.reduce_mean(tf.abs(gradients), [1, 2, 3], keep_dims=True)
     noise = momentum * grad + noise
@@ -83,7 +85,7 @@ img[..., 0] += mean[0]
 img[..., 1] += mean[1]
 img[..., 2] += mean[2]
 
-img = np.clip(img, 0, 225)
+img = np.clip(img, 0, 255)
 # Save the hacked image!
 im = Image.fromarray(img.astype(np.uint8))
 im.save("hacked-image.jpg")
