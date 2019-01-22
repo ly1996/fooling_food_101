@@ -3,7 +3,7 @@
     food-101/
         data/
             checkpoint-01-2.8842.hdf5
-        temp/
+        fooling_food_101/
             fine_tune_with_keras.py
             seperate.py
         images/  #training set
