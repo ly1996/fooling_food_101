@@ -24,16 +24,20 @@ object_type_to_fake = 0
 # Load the image to hack
 img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/apple_pie/1005649.jpg"), target_size=(224, 224))
 original_image = image.img_to_array(img)
+
 print(np.mean(original_image,axis=(0,1)))
 print(np.mean(preprocess_input(original_image),axis=(0,1)))
 
-# original_image = preprocess_input(original_image)
+original_image = preprocess_input(original_image)
 
 # Add a 4th dimension for batch size (as Keras expects)
 original_image = np.expand_dims(original_image, axis=0)
 
-x_min = img = np.clip(original_image - eps, 0, 255)
-x_max = np.clip(original_image + eps, 0, 255)
+x_min = original_image - eps
+x_max = original_image + eps
+
+# x_min = np.clip(original_image - eps, 0, 255)
+# x_max = np.clip(original_image + eps, 0, 255)
 
 # Create a copy of the input image to hack on
 hacked_image = np.copy(original_image)
@@ -85,12 +89,13 @@ for i in range(num_iteration):
     print("Model's predicted likelihood that the image is a toaster: {:.8}".format(cost))
 
 img = hacked_image[0]
-# mean = [103.939, 116.779, 123.68]
-# img[..., 0] += mean[0]
-# img[..., 1] += mean[1]
-# img[..., 2] += mean[2]
-#
-# img = np.clip(img, 0, 255)
+mean = [103.939, 116.779, 123.68]
+img[..., 0] += mean[0]
+img[..., 1] += mean[1]
+img[..., 2] += mean[2]
+img = np.clip(img, 0, 255)
+print(img.shape)
 # Save the hacked image!
+
 im = Image.fromarray(img.astype(np.uint8))
 im.save("hacked-image.jpg")
