@@ -24,6 +24,8 @@ object_type_to_fake = 0
 # Load the image to hack
 img = image.load_img(os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/apple_pie/1005649.jpg"), target_size=(224, 224))
 original_image = image.img_to_array(img)
+print(np.mean(original_image,axis=3))
+print(np.mean(preprocess_input(original_image),axis=3))
 
 # original_image = preprocess_input(original_image)
 
