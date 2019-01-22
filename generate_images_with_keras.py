@@ -78,11 +78,12 @@ def gen_fooling_images(model,x_input,grad):
     for i in range(num_iteration):
         # cost, noise = np.array(K.gradients(cross_entropy, x_input)[0])
         cost,noise = grab_cost_and_gradients_from_mode([x_input,0])
-        print(noise.shape)
 
         noise = noise / np.mean(np.abs(noise), keepdims=True)
         noise = momentum * grad + noise
+
         print(noise.shape)
+        print(x_input.shape)
 
         x_input = x_input + alpha * np.sign(noise)
         x_input = np.clip(x_input, x_min, x_max)
