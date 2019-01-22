@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import os
 from scipy.misc import imread
+from tensorflow.keras.models import load_model
 
 tf.flags.DEFINE_float(
     'max_epsilon', 16.0, 'Maximum size of adversarial perturbation.')
@@ -68,6 +69,7 @@ def stop(x, y, i, x_max, x_min, grad):
 def main(_):
     print("enter main")
     input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images/nachos")
+    model_path = ""
 
     eps = FLAGS.max_epsilon
     batch_shape = [FLAGS.batch_size, FLAGS.image_height, FLAGS.image_width, 3]
@@ -84,10 +86,12 @@ def main(_):
         grad = tf.zeros(shape=batch_shape)
         x_adv, _, _, _, _, _ = tf.while_loop(stop, graph, [x_input, y, i, x_max, x_min, grad])
 
-        with tf.Session() as sess:
-            for filenames, images in load_images(input_dir, batch_shape):
-                print ("shape", images.shape)
-                adv_images = sess.run(x_adv, feed_dict={x_input: images})
+        model = load_model(model_path)
+
+        # with tf.Session() as sess:
+        #     for filenames, images in load_images(input_dir, batch_shape):
+        #         print ("shape", images.shape)
+        #         adv_images = sess.run(x_adv, feed_dict={x_input: images})
 
 if __name__ == '__main__':
     tf.app.run()
