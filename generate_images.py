@@ -40,6 +40,7 @@ def load_images(input_dir, batch_shape):
   filenames = []
   idx = 0
   batch_size = batch_shape[0]
+  print(input_dir)
   for filepath in tf.gfile.Glob(os.path.join(input_dir, '*.png')):
     print(filepath)
     with tf.gfile.Open(filepath) as f:
