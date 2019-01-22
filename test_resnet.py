@@ -33,9 +33,9 @@ original_image = preprocess_input(original_image)
 # Add a 4th dimension for batch size (as Keras expects)
 original_image = np.expand_dims(original_image, axis=0)
 
-preds = model.predict(original_image)
-for perce in preds[0]:
-    print(perce)
+# preds = model.predict(original_image)
+# for perce in preds[0]:
+#     print(perce)
 
 x_min = original_image - eps
 x_max = original_image + eps
@@ -105,10 +105,10 @@ img_norm = np.copy(img)
 img_norm[..., 0] = img[..., 2]
 img_norm[..., 2] = img[..., 0]
 
-original_image = np.expand_dims(img_norm, axis=0)
-preds = model.predict(original_image)
-for perce in preds[0]:
-    print(perce)
+# original_image = np.expand_dims(img_norm, axis=0)
+# preds = model.predict(original_image)
+# for perce in preds[0]:
+#     print(perce)
 
 im = Image.fromarray(img_norm.astype(np.uint8))
 im.save("hacked-image.jpg")
