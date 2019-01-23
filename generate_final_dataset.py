@@ -3,6 +3,7 @@ import shutil
 import random
 
 noise_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_with_noise")
+correct_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_original")
 incorrect_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/incorrect")
 output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/final_data_set")
 
@@ -13,6 +14,7 @@ for root,dirs,files in os.walk(noise_dir):
     for i in range(len(dirs)):
         dir = dirs[i]
         sub_dir = os.path.join(noise_dir, dir)
+        correct_sub_dir = os.path.join(correct_dir, dir)
         incorrect_sub_dir = os.path.join(incorrect_dir, dir)
         target_sub_dir = os.path.join(output_dir, dir)
 
@@ -20,6 +22,7 @@ for root,dirs,files in os.walk(noise_dir):
             os.makedirs(target_sub_dir)
 
         print(sub_dir)
+        print(correct_sub_dir)
         print(incorrect_sub_dir)
         print(target_sub_dir)
 
@@ -30,6 +33,8 @@ for root,dirs,files in os.walk(noise_dir):
         incorrect_files = os.listdir(incorrect_sub_dir)
         incorrect_files_len = len(incorrect_files)
         print(incorrect_files_len)
+
+        print(len(os.listdir(correct_sub_dir)))
 
         for file in noise_files:
             target_path = os.path.join(target_sub_dir, file)
