@@ -18,7 +18,8 @@ EXISTS = [
     'pork_chop',
     'beef_carpaccio',
     'baby_back_ribs',
-    'hot_and_sour_soup'
+    'hot_and_sour_soup',
+    'prime_rib'
 ]
 
 datagen = ImageDataGenerator(
@@ -33,11 +34,11 @@ datagen = ImageDataGenerator(
 original_dir = os.path.expanduser("../images")
 dst_dir = os.path.expanduser("../train_set_new")
 for dirnames in os.listdir(original_dir):
-    for dirs in os.listdir(original_dir + '/' + dirnames):
-        if not dirs in EXISTS:
-        #result = re.findall(r"(.*).jpg", file)
-        #number = result[0]
-        #img = load_img(os.path.join(original_dir, file))
+    if not dirnames in EXISTS:
+        for dirs in os.listdir(original_dir + '/' + dirnames):
+            #result = re.findall(r"(.*).jpg", file)
+            #number = result[0]
+            #img = load_img(os.path.join(original_dir, file))
             path = original_dir + '/' + dirnames + '/' + dirs
             img = load_img(path)
             x = img_to_array(img)
@@ -54,7 +55,7 @@ for dirnames in os.listdir(original_dir):
                 i += 1
                 if i >= 4:
                     break  # otherwise the generator would loop indefinitely
-    print(dirnames + 'complete')
+    print(dirnames + ' complete')
 
 # img = load_img(os.path.expanduser('~/Disk/ic-data/1.jpg'))  # this is a PIL image, please replace to your own file path
 # x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
