@@ -189,7 +189,8 @@ for root,dirs,files in os.walk(input_dir):
         #ceviche:15
         #cheese_plate:16
         #cheesecake:17
-        if i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]:
+        #chicken_curry:18
+        if i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]:
             continue
         dir = dirs[i]
 
