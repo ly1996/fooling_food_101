@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e18abb0c-2264-4c0e-a1a5-04f87a9e83e7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/split_dataset_by_model.py" afterPath="$PROJECT_DIR$/split_dataset_by_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/generate_noise_image.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mix.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,11 +16,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="split_dataset_by_model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="split_dataset_by_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/split_dataset_by_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="86" column="29" lean-forward="true" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+            <state relative-caret-position="223">
+              <caret line="54" column="65" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="65" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -26,11 +28,33 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="generate_noise_image.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/generate_noise_image.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1425">
+              <caret line="95" column="16" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mix.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mix.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="89" lean-forward="false" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="test_resnet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_resnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="578">
+              <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="113" selection-end-column="27" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -69,6 +93,8 @@
         <option value="$PROJECT_DIR$/test_resnet.py" />
         <option value="$PROJECT_DIR$/seperate.py" />
         <option value="$PROJECT_DIR$/split_dataset_by_model.py" />
+        <option value="$PROJECT_DIR$/generate_noise_image.py" />
+        <option value="$PROJECT_DIR$/mix.txt" />
       </list>
     </option>
   </component>
@@ -465,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_resnet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="578">
+          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="113" selection-end-column="27" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -475,8 +501,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/split_dataset_by_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="86" column="29" lean-forward="true" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+        <state relative-caret-position="223">
+          <caret line="54" column="65" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mix.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="89" lean-forward="false" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_noise_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="95" column="16" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
