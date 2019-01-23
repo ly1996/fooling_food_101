@@ -29,6 +29,7 @@ def get_label(img_path):
 for root,dirs,files in os.walk(input_dir):
     dirs.sort()
     print(dirs)
+    mix_types = []
     for i in range(len(dirs)):
         dir = dirs[i]
 
@@ -78,8 +79,12 @@ for root,dirs,files in os.walk(input_dir):
         print("count_incorrect:", count_incorrect)
 
         print(incorrect_counts)
+        mix_type = []
         for j in range(101):
             count = incorrect_counts[j]
             if (count + 0.0) / count_incorrect > 0.05:
                 print(i,j,(count + 0.0) / count_incorrect)
+                mix_type.append(j)
+        mix_types.append(mix_type)
+    print(mix_types)
     break
