@@ -1,4 +1,5 @@
 import os
+import shutil
 from tensorflow.keras.models import load_model
 from PIL import Image
 from tensorflow.keras.preprocessing import image
@@ -45,14 +46,23 @@ for root,dirs,files in os.walk(input_dir):
 
         count_correct = 0
         count_incorrect = 0
+        incorrect_counts = np.zeros((101,), dtype=np.int)
+
         for file in os.listdir(sub_dir):
             predict_class = get_label(os.path.join(sub_dir, file))
             if predict_class == i:
                 count_correct += 1
-                # target_path =
+                target_path = os.path.join(correct_target_sub_dir, file)
+                shutil.copy(os.path.join(sub_dir, file),target_path)
             else:
                 count_incorrect += 1
+                incorrect_counts[predict_class] += 1
+                target_path = os.path.join(incorrect_target_sub_dir, file)
+                shutil.copy(os.path.join(sub_dir, file), target_path)
+
         print("count_correct:",count_correct)
         print("count_incorrect:", count_incorrect)
+
+        print(incorrect_counts,np.sum(incorrect_counts))
 
     break
