@@ -187,8 +187,9 @@ for root,dirs,files in os.walk(input_dir):
         if not os.path.exists(noise_sub_dir):
             os.makedirs(noise_sub_dir)
 
-        gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i)
-        # for file in os.listdir(sub_dir):
-        #     gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
+        # gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i)
+
+        for file in os.listdir(sub_dir):
+            gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
 
     break
