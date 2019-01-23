@@ -13,7 +13,7 @@ num_iteration = 10
 momentum = 1.0
 alpha = eps / num_iteration
 
-model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-12-1.7504.hdf5")
+model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
 model = load_model(model_path)
 
 # Grab a reference to the first and last layer of the neural net
