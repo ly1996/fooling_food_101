@@ -176,6 +176,8 @@ for root,dirs,files in os.walk(input_dir):
     dirs.sort()
     print(dirs)
     for i in range(len(dirs)):
+        if i in [0]:
+            continue
         dir = dirs[i]
 
         sub_dir = os.path.join(input_dir, dir)
@@ -189,7 +191,10 @@ for root,dirs,files in os.walk(input_dir):
 
         # gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i)
 
+        idx = 0
         for file in os.listdir(sub_dir):
+            idx += 1
             gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
-
+            if idx > 70:
+                break
     break
