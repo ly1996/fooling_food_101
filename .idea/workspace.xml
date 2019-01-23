@@ -17,7 +17,7 @@
       <file leaf-file-name="split_dataset_by_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/split_dataset_by_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
+            <state relative-caret-position="486">
               <caret line="54" column="65" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="65" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -29,10 +29,23 @@
       <file leaf-file-name="generate_noise_image.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/generate_noise_image.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-247">
-              <caret line="49" column="7" lean-forward="false" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+            <state relative-caret-position="-9">
+              <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#3683#5962#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generate_images_with_keras.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generate_images_with_keras.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="137" column="9" lean-forward="false" selection-start-line="137" selection-start-column="9" selection-end-line="137" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/mix.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="89" lean-forward="false" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
+              <caret line="9" column="117" lean-forward="true" selection-start-line="9" selection-start-column="117" selection-end-line="9" selection-end-column="117" />
               <folding />
             </state>
           </provider>
@@ -453,24 +466,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generate_images_with_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fine_tune_with_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2399">
-          <caret line="163" column="22" lean-forward="false" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.1/remote_sources/640715681/1405239563/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-349">
@@ -500,14 +495,34 @@
     <entry file="file://$PROJECT_DIR$/mix.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="89" lean-forward="false" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
+          <caret line="9" column="117" lean-forward="true" selection-start-line="9" selection-start-column="117" selection-end-line="9" selection-end-column="117" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fine_tune_with_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1827">
+          <caret line="163" column="22" lean-forward="false" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_images_with_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="137" column="9" lean-forward="false" selection-start-line="137" selection-start-column="9" selection-end-line="137" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/split_dataset_by_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
+        <state relative-caret-position="486">
           <caret line="54" column="65" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="65" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -517,10 +532,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/generate_noise_image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-247">
-          <caret line="49" column="7" lean-forward="false" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+        <state relative-caret-position="-9">
+          <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#3683#5962#0" expanded="false" />
           </folding>
         </state>
       </provider>
