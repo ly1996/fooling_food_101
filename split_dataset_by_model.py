@@ -6,8 +6,8 @@ input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images")
 model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-12-1.7504.hdf5")
 model = load_model(model_path)
 
-def is_correct(model,img,i):
-
+# def is_correct(model,img,i):
+#
 
 for root,dirs,files in os.walk(input_dir):
     dirs.sort()
