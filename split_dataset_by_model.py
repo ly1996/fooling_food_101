@@ -7,6 +7,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 
 input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images")
+test_input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/test-set")
 correct_output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_original")
 incorrect_output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/incorrect")
 model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
@@ -32,6 +33,7 @@ for root,dirs,files in os.walk(input_dir):
         dir = dirs[i]
 
         sub_dir = os.path.join(input_dir,dir)
+        test_sub_dir = os.path.join(test_input_dir,dir)
         correct_target_sub_dir = os.path.join(correct_output_dir,dir)
         incorrect_target_sub_dir = os.path.join(incorrect_output_dir,dir)
         print(sub_dir)
@@ -60,9 +62,24 @@ for root,dirs,files in os.walk(input_dir):
                 target_path = os.path.join(incorrect_target_sub_dir, file)
                 shutil.copy(os.path.join(sub_dir, file), target_path)
 
+        for file in os.listdir(test_sub_dir):
+            predict_class = get_label(os.path.join(sub_dir, file))
+            if predict_class == i:
+                count_correct += 1
+                target_path = os.path.join(correct_target_sub_dir, file)
+                shutil.copy(os.path.join(sub_dir, file),target_path)
+            else:
+                count_incorrect += 1
+                incorrect_counts[predict_class] += 1
+                target_path = os.path.join(incorrect_target_sub_dir, file)
+                shutil.copy(os.path.join(sub_dir, file), target_path)
+
         print("count_correct:",count_correct)
         print("count_incorrect:", count_incorrect)
 
-        print(incorrect_counts,np.sum(incorrect_counts))
-
+        print(incorrect_counts)
+        for j in range(101):
+            count = incorrect_counts[j]
+            if (count + 0.0) / count_incorrect > 0.05:
+                print(i,j,(count + 0.0) / count_incorrect)
     break
