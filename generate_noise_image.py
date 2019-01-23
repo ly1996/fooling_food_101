@@ -195,6 +195,6 @@ for root,dirs,files in os.walk(input_dir):
         for file in os.listdir(sub_dir):
             idx += 1
             gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
-            if idx > 70:
+            if idx > 25:
                 break
     break
