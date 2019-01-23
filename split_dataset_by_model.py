@@ -18,6 +18,12 @@ def get_label(img_path):
     original_image = preprocess_input(original_image)
     original_image = np.expand_dims(original_image, axis=0)
 
+    preds = model.predict(original_image)
+    pred = preds[0]
+    label = np.argmax(pred)
+
+    return label
+
 for root,dirs,files in os.walk(input_dir):
     dirs.sort()
     print(dirs)
@@ -34,11 +40,18 @@ for root,dirs,files in os.walk(input_dir):
         if not os.path.exists(correct_target_sub_dir):
             os.makedirs(correct_target_sub_dir)
 
-            if not os.path.exists(incorrect_target_sub_dir):
-                os.makedirs(incorrect_target_sub_dir)
+        if not os.path.exists(incorrect_target_sub_dir):
+            os.makedirs(incorrect_target_sub_dir)
 
-        # for file in os.listdir(sub_dir):
-        #     predict_class = get_label(os.path.join(sub_dir, file))
-        #     # if predict_class == i:
+        count_correct = 0
+        count_incorrect = 0
+        for file in os.listdir(sub_dir):
+            predict_class = get_label(os.path.join(sub_dir, file))
+            if predict_class == i:
+                count_correct += 1
+            else:
+                count_incorrect += 1
+        print("count_correct:",count_correct)
+        print("count_incorrect:", count_incorrect)
 
     break
