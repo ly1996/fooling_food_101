@@ -178,7 +178,8 @@ for root,dirs,files in os.walk(input_dir):
     for i in range(len(dirs)):
         #beet_salad:5
         #beignets:6
-        if i in [0,1,2,3,4,5,6]:
+        #bibimbap:7
+        if i in [0,1,2,3,4,5,6,7]:
             continue
         dir = dirs[i]
 
