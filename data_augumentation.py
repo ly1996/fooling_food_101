@@ -30,8 +30,8 @@ datagen = ImageDataGenerator(
         horizontal_flip=True,
         fill_mode='nearest')
 
-original_dir = os.path.expanduser("E:/饶世杰的文件/2019谷歌冬令营/food-101/images")
-dst_dir = os.path.expanduser("E:/饶世杰的文件/2019谷歌冬令营/food-101/train_set_new")
+original_dir = os.path.expanduser("../images")
+dst_dir = os.path.expanduser("../train_set_new")
 for dirnames in os.listdir(original_dir):
     for dirs in os.listdir(original_dir + '/' + dirnames):
         if not dirs in EXISTS:
