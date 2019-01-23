@@ -176,7 +176,9 @@ for root,dirs,files in os.walk(input_dir):
     dirs.sort()
     print(dirs)
     for i in range(len(dirs)):
-        if i in [0,1,2,3,4,5]:
+        #beet_salad:5
+        #beignets:6
+        if i in [0,1,2,3,4,5,6]:
             continue
         dir = dirs[i]
 
