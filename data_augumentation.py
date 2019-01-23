@@ -6,6 +6,21 @@ import os
 import re
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 
+EXISTS = [
+    'cheese_plate',
+    'beignets',
+    'hamburger',
+    'tuna_tartare',
+    'garlic_bread',
+    'clam_chowder',
+    'breakfast_burrito',
+    'pancakes',
+    'pork_chop',
+    'beef_carpaccio',
+    'baby_back_ribs',
+    'hot_and_sour_soup'
+]
+
 datagen = ImageDataGenerator(
         rotation_range=0.2,
         width_shift_range=0.2,
@@ -15,30 +30,31 @@ datagen = ImageDataGenerator(
         horizontal_flip=True,
         fill_mode='nearest')
 
-original_dir = os.path.expanduser("../images")
-dst_dir = os.path.expanduser("../train_set_new")
+original_dir = os.path.expanduser("E:/饶世杰的文件/2019谷歌冬令营/food-101/images")
+dst_dir = os.path.expanduser("E:/饶世杰的文件/2019谷歌冬令营/food-101/train_set_new")
 for dirnames in os.listdir(original_dir):
     for dirs in os.listdir(original_dir + '/' + dirnames):
+        if not dirs in EXISTS:
         #result = re.findall(r"(.*).jpg", file)
         #number = result[0]
         #img = load_img(os.path.join(original_dir, file))
-        path = original_dir + '/' + dirnames + '/' + dirs
-        img = load_img(path)
-        x = img_to_array(img)
-        x = x.reshape((1,) + x.shape)
-        save_path = dst_dir + '/' + dirnames
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)   
-        i = 0
-        for batch in datagen.flow(x,
-                                batch_size=1,
-                                save_to_dir=os.path.expanduser(save_path),
-                                save_prefix=dirs[0:-4],
-                                save_format='jpg'):
-            i += 1
-            if i >= 4:
-                break  # otherwise the generator would loop indefinitely
-    print(dirnames + ' complete')
+            path = original_dir + '/' + dirnames + '/' + dirs
+            img = load_img(path)
+            x = img_to_array(img)
+            x = x.reshape((1,) + x.shape)
+            save_path = dst_dir + '/' + dirnames
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)   
+            i = 0
+            for batch in datagen.flow(x,
+                                    batch_size=1,
+                                    save_to_dir=os.path.expanduser(save_path),
+                                    save_prefix=dirs[0:-4],
+                                    save_format='jpg'):
+                i += 1
+                if i >= 4:
+                    break  # otherwise the generator would loop indefinitely
+    print(dirnames + 'complete')
 
 # img = load_img(os.path.expanduser('~/Disk/ic-data/1.jpg'))  # this is a PIL image, please replace to your own file path
 # x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
