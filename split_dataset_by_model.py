@@ -8,7 +8,7 @@ import numpy as np
 input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images")
 correct_output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_original")
 incorrect_output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/incorrect")
-model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-12-1.7504.hdf5")
+model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
 model = load_model(model_path)
 
 def get_label(img_path):
@@ -49,6 +49,7 @@ for root,dirs,files in os.walk(input_dir):
             predict_class = get_label(os.path.join(sub_dir, file))
             if predict_class == i:
                 count_correct += 1
+                # target_path =
             else:
                 count_incorrect += 1
         print("count_correct:",count_correct)
