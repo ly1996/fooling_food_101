@@ -66,7 +66,8 @@ def gen_noise_for_single_image(img_path,target_path,i):
 
         # Ensure that the image doesn't ever change too much to either look funny or to become an invalid image
         hacked_image = np.clip(hacked_image, x_min, x_max)
-        print("Model's predicted likelihood that the image is a toaster: {:.8}".format(cost))
+
+    print("Model's predicted likelihood that the image is a toaster: {:.8}".format(cost))
 
     img = hacked_image[0]
     mean = [103.939, 116.779, 123.68]
