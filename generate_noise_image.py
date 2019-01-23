@@ -60,6 +60,7 @@ def gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i):
             cost = 0.0
 
             for i in range(num_iteration):
+                print(i)
                 cost, gradients = grab_cost_and_gradients_from_model([hacked_image, 0])
 
                 if np.isnan(np.mean(np.abs(gradients), axis=(1, 2, 3), keepdims=True)).any():
@@ -80,13 +81,18 @@ def gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i):
             print(cost)
 
             for i in range(16):
-                img = hacked_image[0]
+                img = hacked_image[i]
+
+                original_image = np.expand_dims(img, axis=0)
+                preds = model.predict(original_image)
+                print (np.argmax(preds[0]))
+
                 mean = [103.939, 116.779, 123.68]
                 img[..., 0] += mean[0]
                 img[..., 1] += mean[1]
                 img[..., 2] += mean[2]
                 img = np.clip(img, 0, 255)
-                print(img.shape)
+                # print(img.shape)
                 # Save the hacked image!
 
                 img_norm = np.copy(img)
@@ -184,6 +190,5 @@ for root,dirs,files in os.walk(input_dir):
         gen_noise_for_sub_dir(sub_dir,noise_sub_dir,i)
         # for file in os.listdir(sub_dir):
         #     gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
-
 
     break
