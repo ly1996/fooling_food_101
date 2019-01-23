@@ -40,8 +40,8 @@ EXISTS = [
 original_dir = os.path.expanduser("../images")
 dst_dir = os.path.expanduser("../train_set_new")
 for dirnames in os.listdir(original_dir):
-    for dirs in os.listdir(original_dir + '/' + dirnames):
-        if not dirs in EXISTS:
+    if not dirnames in EXISTS:
+        for dirs in os.listdir(original_dir + '/' + dirnames):
             path = original_dir + '/' + dirnames + '/' + dirs
             im = Image.open(path)
             # 亮度增强
