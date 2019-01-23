@@ -25,6 +25,7 @@ for root,dirs,files in os.walk(noise_dir):
 
         noise_files = os.listdir(sub_dir)
         noise_files_len = len(noise_files)
+        print(noise_files_len)
 
         incorrect_files = os.listdir(incorrect_sub_dir)
         incorrect_files_len = len(incorrect_files)
