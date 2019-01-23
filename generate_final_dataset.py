@@ -21,12 +21,14 @@ for root,dirs,files in os.walk(noise_dir):
 
         print(sub_dir)
         print(incorrect_sub_dir)
+        print(target_sub_dir)
 
         noise_files = os.listdir(sub_dir)
         noise_files_len = len(noise_files)
 
         incorrect_files = os.listdir(incorrect_sub_dir)
         incorrect_files_len = len(incorrect_files)
+        print(incorrect_files_len)
 
         for file in noise_files:
             target_path = os.path.join(target_sub_dir, file)
@@ -45,12 +47,11 @@ for root,dirs,files in os.walk(noise_dir):
             if file not in paths:
                 paths.append(file)
                 tmp += 1
-            if tmp ==count:
+            if tmp == count:
                 break
         print(len(paths))
 
         for file in paths:
             target_path = os.path.join(target_sub_dir, file)
             shutil.copy(os.path.join(incorrect_sub_dir, file), target_path)
-
     break
