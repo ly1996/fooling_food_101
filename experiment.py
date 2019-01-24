@@ -109,6 +109,8 @@ for i in range(1):
     normal_label_list = []
     normal_index_list = []
 
+    real_index_list = []
+
     img_list = pictures['img_list']
 
     is_normal_right = True
@@ -130,6 +132,7 @@ for i in range(1):
             normal_index_list.append(i)
 
         if real_label == target_class:
+            real_index_list.append(i)
             if noise_label != target_class:
                 is_noise_right = False
             if normal_label != target_class:
@@ -140,12 +143,12 @@ for i in range(1):
             if normal_label == target_class:
                 is_normal_right = False
 
-    print("target class", target_class)
+    print("target class", target_class,real_index_list)
     print("target_type_name", target_type_name)
     print("is_normal_right",is_normal_right)
-    print(normal_label_list)
+    print(normal_label_list,normal_index_list)
     print("is_noise_right", is_noise_right)
-    print(noise_label_list)
+    print(noise_label_list,noise_index_list)
 
 
 
