@@ -81,7 +81,8 @@ def pick_pictures():
     return rst
 
 model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
-model = load_model(model_path)
+resnet_mode_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-new-55-1.0364.hdf5")
+model = load_model(resnet_mode_path)
 
 def get_label(img_path):
     img = image.load_img(img_path,
