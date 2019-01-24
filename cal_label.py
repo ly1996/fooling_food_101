@@ -23,8 +23,37 @@ def get_label(img_path):
 
     return label
 
-img_path_1 = "/home/ahahadelyaly/winter-camp-pek/food-101/food-101/new_images/correct_original/apple_pie/235537.jpg"
-img_path_2 = "/home/ahahadelyaly/winter-camp-pek/food-101/food-101/new_images/correct_with_noise/apple_pie/235537.jpg"
+# img_path_1 = "/home/ahahadelyaly/winter-camp-pek/food-101/food-101/new_images/correct_original/apple_pie/235537.jpg"
+# img_path_2 = "/home/ahahadelyaly/winter-camp-pek/food-101/food-101/new_images/correct_with_noise/apple_pie/235537.jpg"
+#
+# get_label(img_path_1)
+# get_label(img_path_2)
 
-get_label(img_path_1)
-get_label(img_path_2)
+final_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/final_data_set")
+normal_path = os.path.expanduser('~/winter-camp-pek/tmp/food-101/images')
+
+count_correct = 0
+count = 0
+
+for root,dirs,files in os.walk(final_dir):
+    dirs.sort()
+    print(dirs)
+
+    for i in range(len(dirs)):
+        dir = dirs[i]
+        sub_dir = os.path.join(final_dir, dir)
+        normal_sub_dir = os.path.join(normal_path, dir)
+
+        print(sub_dir)
+        print(normal_sub_dir)
+
+        for file in os.listdir(sub_dir):
+            count += 1
+            predict_class = get_label(os.path.join(normal_sub_dir, file))
+            if predict_class == i:
+                count_correct += 1
+
+    break
+
+print(count)
+print(count_correct)
