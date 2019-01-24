@@ -7,7 +7,6 @@ import numpy as np
 
 normal_path = os.path.expanduser('~/winter-camp-pek/tmp/food-101/images')
 final_data_set = os.path.expanduser('~/winter-camp-pek/food-101/food-101/new_images/final_data_set')
-#final_data_set = 'E:/饶世杰的文件/2019谷歌冬令营/food-101/images'
 
 mix_list = [
     [2, 8, 42, 72, 100], [74, 77, 79, 93], [0, 8, 12, 22], [4, 5, 10, 13, 39, 99], [3, 5, 39, 99], [3, 39, 88, 99], [12, 31, 42], [5, 70, 75, 81, 88], [0, 42], [19, 56, 67, 96], [3, 5, 13
@@ -106,22 +105,29 @@ for i in range(1):
     target_type_name = pictures['label']
 
     noise_label_list = []
+    noise_index_list = []
     normal_label_list = []
+    normal_index_list = []
 
     img_list = pictures['img_list']
 
     is_normal_right = True
     is_noise_right = True
 
-    for img_description in img_list:
+    for i in range(8):
+        img_description = img_list[i]
+    # for img_description in img_list:
+
         real_label = img_description[2]
         noise_label = get_label(img_description[0])
         normal_label = get_label(normal_path + '/' + img_description[1])
 
         if noise_label == target_class:
             noise_label_list.append(img_description[0])
+            noise_index_list.append(i)
         if normal_label == target_class:
             normal_label_list.append(normal_path + '/' + img_description[1])
+            normal_index_list.append(i)
 
         if real_label == target_class:
             if noise_label != target_class:
