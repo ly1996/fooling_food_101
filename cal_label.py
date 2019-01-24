@@ -19,7 +19,7 @@ def get_label(img_path):
     pred = preds[0]
     print(pred)
     label = np.argmax(pred)
-    print(label)
+    print(label,pred[label])
 
     return label
 
