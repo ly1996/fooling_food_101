@@ -98,7 +98,8 @@ def get_label(img_path):
 
 normal_pass_count = 0
 noise_pass_count = 0
-for i in range(10):
+for idx in range(1000):
+    print(idx)
     pictures = pick_pictures()
 
     target_class = pictures['index']
@@ -143,13 +144,26 @@ for i in range(10):
                 is_noise_right = False
             if normal_label == target_class:
                 is_normal_right = False
+    if is_normal_right:
+        normal_pass_count += 1
+    if is_noise_right:
+        noise_pass_count += 1
 
-    print("target class", target_class,real_index_list)
-    print("target_type_name", target_type_name)
-    print("is_normal_right",is_normal_right)
-    print(normal_label_list,normal_index_list)
-    print("is_noise_right", is_noise_right)
-    print(noise_label_list,noise_index_list)
+    if len(noise_label_list) != 0 and is_normal_right :
+        print(pictures)
+        print("target class", target_class, real_index_list)
+        print("target_type_name", target_type_name)
+        print("is_normal_right", is_normal_right)
+        print(normal_label_list, normal_index_list)
+        print("is_noise_right", is_noise_right)
+        print(noise_label_list, noise_index_list)
+
+    # print("target class", target_class,real_index_list)
+    # print("target_type_name", target_type_name)
+    # print("is_normal_right",is_normal_right)
+    # print(normal_label_list,normal_index_list)
+    # print("is_noise_right", is_noise_right)
+    # print(noise_label_list,noise_index_list)
 
 
 
