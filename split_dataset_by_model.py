@@ -1,7 +1,6 @@
 import os
 import shutil
 from tensorflow.keras.models import load_model
-from PIL import Image
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
