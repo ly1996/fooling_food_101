@@ -40,7 +40,7 @@ for root,dirs,files in os.walk(noise_dir):
             target_path = os.path.join(target_sub_dir, file)
             shutil.copy(os.path.join(sub_dir, file), target_path)
 
-        count = int(noise_files_len * (incorrect_files_len + 0.0) / (1000 - incorrect_files_len) / 2)
+        count = int(noise_files_len * (incorrect_files_len + 0.0) / (1000 - incorrect_files_len) / 3)
         if count == 0:
             count = 1
         print(count)
