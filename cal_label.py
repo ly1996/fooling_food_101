@@ -8,7 +8,7 @@ import numpy as np
 
 model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
 inception_model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-inception-64-1.0762.hdf5")
-model = load_model(model_path)
+model = load_model(inception_model_path)
 
 def get_label_inception(img_path):
     img = image.load_img(img_path,
