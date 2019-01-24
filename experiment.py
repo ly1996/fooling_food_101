@@ -98,7 +98,7 @@ def get_label(img_path):
 
 normal_pass_count = 0
 noise_pass_count = 0
-for i in range(1):
+for i in range(10):
     pictures = pick_pictures()
 
     target_class = pictures['index']
