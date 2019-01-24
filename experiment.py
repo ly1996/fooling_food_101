@@ -164,6 +164,8 @@ for idx in range(1000):
     # print(normal_label_list,normal_index_list)
     # print("is_noise_right", is_noise_right)
     # print(noise_label_list,noise_index_list)
+print(normal_pass_count)
+print(noise_pass_count)
 
 
 
