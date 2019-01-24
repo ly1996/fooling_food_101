@@ -2,7 +2,8 @@ import os
 from random import randint
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+# from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+from tensorflow.keras.applications.inception_v3 import InceptionV3, preprocess_input
 import numpy as np
 
 normal_path = os.path.expanduser('~/winter-camp-pek/tmp/food-101/images')
@@ -81,8 +82,22 @@ def pick_pictures():
     return rst
 
 model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-54-1.1064.hdf5")
-resnet_mode_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-new-55-1.0364.hdf5")
-model = load_model(resnet_mode_path)
+resnet_model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-new-55-1.0364.hdf5")
+inception_model_path = os.path.expanduser("~/winter-camp-pek/tmp/fooling_food_101/checkpoint-inception-64-1.0762.hdf5")
+model = load_model(inception_model_path)
+
+def get_label_inception(img_path):
+    img = image.load_img(img_path,
+                         target_size=(299, 299))
+    original_image = image.img_to_array(img)
+    original_image = preprocess_input(original_image)
+    original_image = np.expand_dims(original_image, axis=0)
+
+    preds = model.predict(original_image)
+    pred = preds[0]
+    label = np.argmax(pred)
+
+    return label
 
 def get_label(img_path):
     img = image.load_img(img_path,
@@ -124,8 +139,11 @@ for idx in range(1000):
     # for img_description in img_list:
 
         real_label = img_description[2]
-        noise_label = get_label(img_description[0])
-        normal_label = get_label(normal_path + '/' + img_description[1])
+        # noise_label = get_label(img_description[0])
+        # normal_label = get_label(normal_path + '/' + img_description[1])
+
+        noise_label = get_label_inception(img_description[0])
+        normal_label = get_label_inception(normal_path + '/' + img_description[1])
 
         if noise_label == target_class:
             noise_label_list.append(img_description[0])
