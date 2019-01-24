@@ -40,7 +40,7 @@ def pick_pictures():
         x = randint(0, total - 1)
         if not x in temp:
             temp.append(x)
-            img_list.append([bad_img_dir + '/' + img_files[x], rst['index']])
+            img_list.append([bad_img_dir + '/' + img_files[x], rst['label'] + '/' + img_files[x], rst['index']])
             cnt+=1
     #print(img_list)
 
@@ -56,7 +56,7 @@ def pick_pictures():
             x = randint(0, total - 1)
             if not x in temp:
                 temp.append(x)
-                img_list.append([mix_dir + '/' + img_files[x], min(mix_list[rst['index']])])
+                img_list.append([mix_dir + '/' + img_files[x], dirs[min(mix_list[rst['index']])] + '/' + img_files[x], min(mix_list[rst['index']])])
                 cnt+=1
     #print(rst['index'], mix_dir)
     #print(img_list)
@@ -69,7 +69,7 @@ def pick_pictures():
             img_files = os.listdir(new_dir)
             total = len(img_files)
             x0 = randint(0, total - 1)
-            img_list.append([new_dir + '/' + img_files[x0], x])
+            img_list.append([new_dir + '/' + img_files[x0], dirs[x] + '/' + img_files[x0], x])
 
     #print(img_list)
     rst['img_list'] = img_list
