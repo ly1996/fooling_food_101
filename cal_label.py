@@ -44,6 +44,8 @@ def get_label(img_path):
 # get_label(img_path_1)
 # get_label(img_path_2)
 
+#测试resnet50 和 inception v3在正常的验证码库上的精确率
+
 final_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/final_data_set")
 normal_path = os.path.expanduser('~/winter-camp-pek/tmp/food-101/images')
 

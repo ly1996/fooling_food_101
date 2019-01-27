@@ -7,6 +7,8 @@ correct_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images
 incorrect_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/incorrect")
 output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/final_data_set")
 
+#将噪声图片和分类错误的图片组成构成最终的验证码库
+
 for root,dirs,files in os.walk(noise_dir):
     dirs.sort()
     print(dirs)

@@ -8,7 +8,10 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras import backend as K
 
+#将分类正确的图片加噪声
+#输入
 input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_original")
+#输出
 noise_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_with_noise")
 
 eps = 16.0
@@ -193,8 +196,6 @@ for root,dirs,files in os.walk(input_dir):
         #chicken_quesadilla:19
         #chicken_wings:20
         #chocolate_cake:21
-        if i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]:
-            continue
         dir = dirs[i]
 
         sub_dir = os.path.join(input_dir, dir)
@@ -212,6 +213,4 @@ for root,dirs,files in os.walk(input_dir):
         for file in os.listdir(sub_dir):
             idx += 1
             gen_noise_for_single_image(os.path.join(sub_dir, file),os.path.join(noise_sub_dir, file),i)
-            if idx > 25:
-                break
     break

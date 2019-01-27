@@ -5,6 +5,8 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 
+#利用Resnet50将food 101数据集分成分类正确的部分和分类错误的部分
+
 input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/images")
 test_input_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/test-set")
 correct_output_dir = os.path.expanduser("~/winter-camp-pek/food-101/food-101/new_images/correct_original")

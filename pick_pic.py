@@ -1,8 +1,9 @@
 import os
 from random import randint
 
+#生成验证码组的代码
+
 final_data_set = os.path.expanduser('~/winter-camp-pek/food-101/food-101/new_images/final_data_set')
-#final_data_set = 'E:/饶世杰的文件/2019谷歌冬令营/food-101/images'
 
 mix_list = [
     [2, 8, 42, 72, 100], [74, 77, 79, 93], [0, 8, 12, 22], [4, 5, 10, 13, 39, 99], [3, 5, 39, 99], [3, 39, 88, 99], [12, 31, 42], [5, 70, 75, 81, 88], [0, 42], [19, 56, 67, 96], [3, 5, 13

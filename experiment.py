@@ -112,6 +112,8 @@ def get_label(img_path):
 
     return label
 
+#在resnet 50和inception v3上测试我们验证码组的通过率
+
 normal_pass_count = 0
 noise_pass_count = 0
 for idx in range(1000):
